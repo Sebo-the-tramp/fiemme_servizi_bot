@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "test_fiemme",
+            "database": "C:\\Users\\sebastian\\Desktop\\bot.db"
+        }
+    ]
+}
