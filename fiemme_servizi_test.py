@@ -26,10 +26,16 @@ from pytz import timezone
 parser = configparser.ConfigParser()
 parser.read("config/.config")
 
-TOKEN = str(parser.get("config", "TOKEN"))
+TOKEN = str(parser.get("config", "TOKEN_TEST"))
 
-#TIME = datetime.time(hour=_hour, minute=_minute, second=_seconds, tzinfo=timezone('Europe/Rome'))
-TIME = datetime.time(hour=20, minute=00, tzinfo=timezone('Europe/Rome'))
+test = datetime.datetime.now() + datetime.timedelta(seconds=2)
+
+_hour = int(test.strftime("%H"))
+_minute = int(test.strftime("%M"))
+_seconds = int(test.strftime("%S"))
+print(_seconds)
+
+TIME = datetime.time(hour=_hour, minute=_minute, second=_seconds, tzinfo=timezone('Europe/Rome'))
 
 KEYBOARD = [
         [InlineKeyboardButton("Carano", callback_data='0')],
@@ -121,9 +127,11 @@ def get_text(comune):
     text = "" 
             
     tomorrow = datetime.datetime.now() - datetime.timedelta(days=3)        
-    day_of_week = tomorrow.weekday()    
+    day_of_week = tomorrow.weekday()
+    print("week_day", day_of_week)
     
-    list_mondizie = MONDIZIE[comune][day_of_week]    
+    list_mondizie = MONDIZIE[comune][day_of_week]
+    print(list_mondizie)
     
     # if mondizie presenti
     if(list_mondizie):
@@ -150,7 +158,7 @@ def stop_notification(update: Update, context: CallbackContext):
     update.message.reply_text('Ok da adesso non riceverai più notifiche, a presto!')
     
 def remove_user(chat_id):
-    con = sqlite3.connect('bot.db')
+    con = sqlite3.connect('bot_test.db')
     cur = con.cursor()    
     cur.execute("DELETE FROM users WHERE chat_id = " + str(chat_id))        
     con.commit()
@@ -183,7 +191,7 @@ def response(update: Update, context: CallbackContext) -> None:
     query.edit_message_text(text=f"Comune Selezionato: {COMUNI[int(query.data)]}🏘\n\nOgni giorno alle 20 ti verrà inviato un promemoria🥳\nControlla di avere le notifiche attive!🙈")
     
 def insert_user_into_db(chat_id, comune):
-    con = sqlite3.connect('bot.db')
+    con = sqlite3.connect('bot_test.db')
     cur = con.cursor()
       
     cur.execute("SELECT * FROM users WHERE chat_id = " + str(chat_id))    
@@ -211,7 +219,7 @@ def remove_job_if_exists(name: str, context: CallbackContext) -> bool:
     return True
 
 def read_saved_users(job_queue):    
-    con = sqlite3.connect('bot.db')
+    con = sqlite3.connect('bot_test.db')
     cur = con.cursor()
         
     cur.execute('''CREATE TABLE IF NOT EXISTS users (chat_id integer primary key, comune text)''')    
