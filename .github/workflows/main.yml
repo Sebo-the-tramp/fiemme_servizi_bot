@@ -26,7 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Set up the environment
         run: |
-          pip install -r requirements.txt       
+          pip install -r ./code/libraries/requirements.txt       
 
       # Runs a single command using the runners shell
       - name: Test the python executable
