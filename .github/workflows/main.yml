@@ -21,12 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
-      # Runs a single command using the runners shell
-      - name: Set up the environment
-        run: |
-          pip install -r ./libraries/requirements.txt
+      - uses: actions/checkout@v2           
           
       - name: Prepare libraries to be uploaded
         run: |
@@ -38,6 +33,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      
+      # Runs a single command using the runners shell
+      - name: Set up the environment
+        run: |
+          pip install -r ./libraries/requirements.txt
   
       # Runs a single command using the runners shell
       - name: Test the python executable
