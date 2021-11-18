@@ -98,7 +98,7 @@ jobs:
           memory_size: 128
           timeout: 10
           handler: modify.py
-          role: arn:aws:iam::lambda_role:role/microservice
+          role: arn:aws:iam::148437798467:role/iam_for_lambda
           runtime: python3.9
           
       
