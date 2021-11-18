@@ -31,7 +31,12 @@ jobs:
       - name: Prepare libraries to be uploaded
         run: |
           pip install -r ./libraries/requirements.txt -t ./libraries/python
-
+          
+  test:  
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
       # Runs a single command using the runners shell
       - name: Test the python executable
         run: |
