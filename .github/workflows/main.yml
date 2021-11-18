@@ -40,5 +40,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Test the python executable
         run: |
-          cd code
+          pwd
+          cd ./code
           python -m unittest tests.send_message_test
