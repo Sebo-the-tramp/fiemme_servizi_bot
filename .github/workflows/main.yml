@@ -78,7 +78,7 @@ jobs:
           cp ./code/utils/db_utils.py ./upload/send_message/db_utils.py
         
       - name: build zip for modify data
-      - uses: montudor/action-zip@v1
+        uses: montudor/action-zip@v1    
         with:
           args: zip -qq -r modify.zip upload/modify_data
           
