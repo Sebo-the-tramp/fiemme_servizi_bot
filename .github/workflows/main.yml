@@ -66,12 +66,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: build zip
+      
+      - name: prepare files
         run: |
           mkdir upload
           mkdir upload/send_message
           mkdir upload/modify_data
-          cp ./code/new/modify_data/modify.py ./upload/modify_data/modify.py
-          cp ./code/new/send_message/send_message.py ./upload/send_message/send_message.py
+          cp ./code/new/modify.py ./upload/modify_data/modify.py
+          cp ./code/utils/db_utils.py ./upload/modify_data/db_utils.py
+          cp ./code/new/send_message.py ./upload/send_message/send_message.py
+          cp ./code/utils/db_utils.py ./upload/send_message/db_utils.py
+        
+      - name: build zip for modify data
+      - uses: papeloto/action-zip@v1
+        with:
+          files: ./upload/modify_data
+          dest: ./upload/modify_data.zip
+          
+      
+
   
             
