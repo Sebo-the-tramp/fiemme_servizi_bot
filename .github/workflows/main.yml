@@ -26,6 +26,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: Set up the environment
         run: |
+          pip install -r ./libraries/requirements.txt
+          
+      - name: Prepare libraries to be uploaded
+        run: |
           pip install -r ./libraries/requirements.txt -t ./libraries/python
 
       # Runs a single command using the runners shell
