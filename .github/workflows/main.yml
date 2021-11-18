@@ -80,7 +80,26 @@ jobs:
       - name: build zip for modify data
         uses: montudor/action-zip@v1    
         with:
-          args: zip -qq -r modify.zip upload/modify_data
+          args: zip -qq -r modify_data.zip upload/modify_data
+          
+      - name: build zip for send_message
+        uses: montudor/action-zip@v1    
+        with:
+          args: zip -qq -r send_message.zip upload/send_message
+          
+      - name: Deploy to aws function 
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: gorush
+          zip_file: modify_data.zip
+          memory_size: 128
+          timeout: 10
+          handler: modify.py
+          role: arn:aws:iam::xxxxxxxxxxx:role/microservice
+          runtime: python3.9
           
       
 
