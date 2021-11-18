@@ -41,7 +41,7 @@ resource "aws_lambda_function" "test_lambda" {
 
   environment {
     variables = {
-      TELEGRAM_TOKEN = "1878021466:AAHiddZwscRyM6vlC3sYa9_Y9LB0A8XmKbU"
+      TELEGRAM_TOKEN = ""
     }
   }
 }
