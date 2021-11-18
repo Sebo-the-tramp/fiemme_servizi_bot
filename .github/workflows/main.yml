@@ -21,7 +21,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2           
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
           
       - name: Prepare libraries to be uploaded
         run: |
@@ -33,6 +39,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       
       # Runs a single command using the runners shell
       - name: Set up the environment
@@ -45,3 +57,21 @@ jobs:
           pwd
           cd ./code
           python -m unittest tests.send_message_test
+  
+  
+  upload:  
+    needs: test    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: build zip
+        run: |
+          mkdir upload
+          mkdir upload/send_message
+          mkdir upload/modify_data
+          cp ./code/new/modify_data/modify.py ./upload/modify_data/modify.py
+          cp ./code/new/send_message/send_message.py ./upload/send_message/send_message.py
+  
+            
