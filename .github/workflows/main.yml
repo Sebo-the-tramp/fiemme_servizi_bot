@@ -98,8 +98,8 @@ jobs:
           memory_size: 128
           timeout: 10
           handler: modify.py
-          role: arn:aws:iam::148437798467:user/fiemme_servizi_DB
-          runtime: python3.9
+          role: arn:aws:iam::148437798467:role/iam_for_lambda
+          runtime: python3.8
           
       
 
