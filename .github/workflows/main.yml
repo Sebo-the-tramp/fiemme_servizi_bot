@@ -81,8 +81,7 @@ jobs:
         uses: montudor/action-zip@v1
       
       - name: build zip for modify data
-        run: zip -qq -r modify_data.zip .
-        working-directory: upload/modify_data
+        run: zip -qq -r modify_data.zip upload/modify_data
           
       - name: build zip for send_message
         uses: montudor/action-zip@v1    
