@@ -81,12 +81,10 @@ jobs:
         uses: montudor/action-zip@v1
       
       - name: build zip for modify data
-        run: zip -qq -r modify_data.zip upload/modify_data
-          
-      - name: build zip for send_message
-        uses: montudor/action-zip@v1    
-        with:
-          args: zip -qq -r send_message.zip upload/send_message
+        run: |
+          cd upload/modify_data
+          zip -qq -r modify_data.zip .
+          mv modify_data.zip ../../
           
       - name: Deploy to aws function 
         uses: appleboy/lambda-action@master
