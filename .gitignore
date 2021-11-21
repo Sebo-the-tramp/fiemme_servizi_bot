@@ -1,2 +1,6 @@
 **/python/**
 **.pyc
+**/.terraform/**
+**.terraform**
+**terraform.**
+**.pyc
