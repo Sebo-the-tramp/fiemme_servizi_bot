@@ -53,7 +53,8 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      
+            
+      # Use the artifact as the variables
       # Runs a single command using the runners shell
       - name: Set up the environment
         run: |
@@ -72,6 +73,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+    
+    - run: cd terraform
     
     - name: Checkout  
       uses: actions/checkout@v2
