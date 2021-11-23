@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_event_rule" "telegram_daily_reminder" {
   name                = "daily_chron_job"
-  schedule_expression = "cron(0 19 ? * MON-FRI *)"
+  schedule_expression = "cron(0 19 ? * MON-FRI *)"  
 }
 
 resource "aws_cloudwatch_event_target" "check_foo_every_one_minute" {

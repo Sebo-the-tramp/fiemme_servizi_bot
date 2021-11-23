@@ -8,10 +8,12 @@ resource "aws_lambda_function" "fiemmebot_send_reminder" {
 
   environment {
     variables = {
-      foo = "bar"
+      KEY            = "",
+      SECRET         = "",
+      TELEGRAM_TOKEN = "",
     }
   }
 
-  layers = [aws_lambda_layer_version.telegram_bot_libraries.arn]  
+  layers = [aws_lambda_layer_version.telegram_bot_libraries.arn]
 
 }
