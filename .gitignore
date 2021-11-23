@@ -4,3 +4,5 @@
 **.terraform**
 **terraform.**
 **.pyc
+
+variables.tf

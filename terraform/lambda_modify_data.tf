@@ -8,12 +8,10 @@ resource "aws_lambda_function" "fiemmebot_modify_data" {
 
   environment {
     variables = {
-      KEY = "",
-      SECRET = "",
-      TELEGRAM_TOKEN = "",
+      
     }
   }
 
-  layers = [aws_lambda_layer_version.telegram_bot_libraries.arn]  
+  layers = [aws_lambda_layer_version.telegram_bot_libraries.arn]
 
 }
