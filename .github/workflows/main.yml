@@ -30,9 +30,9 @@ jobs:
             ${{ runner.os }}-pip-
           
       - name: Prepare libraries to be uploaded
-        run: |
-          cp ./code/utils/db_utils.py ./libraries/python/db_utils.py
+        run: |          
           pip install -r ./libraries/requirements.txt -t ./libraries/python
+          cp ./code/utils/db_utils.py ./libraries/python/db_utils.py
           
   test:  
     needs: build
