@@ -8,9 +8,9 @@ resource "aws_lambda_function" "fiemmebot_modify_data" {
 
   environment {
     variables = {
-      KEY = "AKIASFD4VBZBSPKYX4XJ",
-      SECRET = "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",
-      TELEGRAM_TOKEN = "1878021466:AAHiddZwscRyM6vlC3sYa9_Y9LB0A8XmKbU",
+      KEY = "",
+      SECRET = "",
+      TELEGRAM_TOKEN = "",
     }
   }
 
