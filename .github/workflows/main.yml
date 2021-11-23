@@ -62,7 +62,7 @@ jobs:
           
   terraform:  
     name: 'Terraform'    
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
     
