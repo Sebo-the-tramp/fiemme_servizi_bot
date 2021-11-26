@@ -33,7 +33,14 @@ jobs:
         run: |          
           pip install -r ./libraries/requirements.txt -t ./libraries/python
           cp ./code/utils/db_utils.py ./libraries/python/db_utils.py
+          cd ./libraries/python
+          zip -qq -r python.zip .
           
+      - uses: actions/upload-artifact@v2
+        with:
+          name: python.zip
+          path: ./libraries/python/python.zip
+
   test:  
     needs: build
     runs-on: ubuntu-latest
@@ -46,7 +53,8 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      
+            
+      # Use the artifact as the variables
       # Runs a single command using the runners shell
       - name: Set up the environment
         run: |
@@ -64,21 +72,28 @@ jobs:
     name: 'Terraform'    
     needs: test
     runs-on: ubuntu-latest
-    steps:
+    
+    defaults:
+      run:
+        working-directory: ./terraform
+    
+    steps:       
     
     - name: Checkout  
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2          
+    
+    - name: credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:   
       # terraform_version: 0.13.0
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-    
-    - name: Terraform Format  
-      id: fmt 
-      # check if the terraform files are formated correctly
-      run: terraform fmt -check
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}  
     
     - name: Terraform Init
       id: init 
@@ -88,7 +103,7 @@ jobs:
       id: validate  
       run: terraform validate -no-color
       
-    - name: Terraform Plan 
+    - name: Terraform Plan   
       id: plan 
       if: github.event_name == 'pull_request' 
       run: terraform plan -no-color 
@@ -132,7 +147,7 @@ jobs:
       run: terraform apply -auto-approve
   
   upload:  
-    needs: test    
+    needs: terraform    
     runs-on: ubuntu-latest
     
     steps:
