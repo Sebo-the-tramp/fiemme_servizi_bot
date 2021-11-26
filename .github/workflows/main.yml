@@ -144,7 +144,7 @@ jobs:
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'  
-      run: terraform apply -auto-approve
+      run: terraform apply -auto-approve -var="key=$AWS_ACCESS_KEY_ID"
   
   upload:  
     needs: terraform    
