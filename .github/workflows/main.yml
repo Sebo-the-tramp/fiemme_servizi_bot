@@ -92,7 +92,7 @@ jobs:
         
     - name: unzip the artifact
       run: |
-        unzip -qq ./python.zip -d ./target
+        unzip -qq ./python -d ./target
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
