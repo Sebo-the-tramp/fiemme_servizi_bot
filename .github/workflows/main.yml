@@ -81,9 +81,9 @@ jobs:
     - name: Prepare libraries to be uploaded
       run: |          
         pip install -r ../libraries/requirements.txt -t ../libraries/python
-        mkdir ./libraries/python/utils
-        cp ./code/utils/db_utils.py ./libraries/python/utils/
-        cd ./libraries/python
+        mkdir ../libraries/python/utils
+        cp ../code/utils/db_utils.py ../libraries/python/utils/
+        cd ../libraries/python
         zip -qq -r python.zip .
           
     
