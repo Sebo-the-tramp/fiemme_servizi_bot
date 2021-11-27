@@ -92,7 +92,7 @@ jobs:
         
     - name: unzip the artifact
       run: |
-        unzip -qq ./python -d ./target
+        unzip -qq ./home/runner/work/fiemme_servizi_bot/fiemme_servizi_bot/python.zip -d ./home/runner/work/fiemme_servizi_bot/fiemme_servizi_bot/target
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
