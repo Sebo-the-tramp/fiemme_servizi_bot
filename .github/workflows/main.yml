@@ -78,16 +78,16 @@ jobs:
       run:
         working-directory: ./terraform    
     
-    steps:  
+    steps:         
     
+    - name: Checkout  
+      uses: actions/checkout@v2          
+      
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
         name: python.zip
         path: ./
-    
-    - name: Checkout  
-      uses: actions/checkout@v2          
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
