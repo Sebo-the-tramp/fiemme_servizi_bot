@@ -148,7 +148,7 @@ jobs:
         DYNAMO_SECRET_ACCESS_KEY: ${{ secrets.DYNAMO_SECRET_ACCESS_KEY }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'  
-      run: terraform apply -auto-approve -var="key=$AWS_ACCESS_KEY_ID" -var="secret=$AWS_SECRET_ACCESS_KEY" -var="telegram_token=$TELEGRAM_TOKEN"
+      run: terraform apply -auto-approve -var="key=$DYNAMO_ACCESS_KEY_ID" -var="secret=$DYNAMO_SECRET_ACCESS_KEY" -var="telegram_token=$TELEGRAM_TOKEN"
   
   upload:  
     needs: terraform    
