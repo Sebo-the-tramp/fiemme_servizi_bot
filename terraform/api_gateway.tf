@@ -38,6 +38,6 @@ resource "aws_lambda_permission" "api_gw" {
 
 resource "null_resource" "set_webhook_telegram" {
   provisioner "local-exec" {
-    command = "curl https://api.telegram.org/bot***REMOVED***/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
+    command = "curl https://api.telegram.org/bot1878021466:AAHiddZwscRyM6vlC3sYa9_Y9LB0A8XmKbU/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
   }
 }
