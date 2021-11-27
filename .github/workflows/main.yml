@@ -157,6 +157,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: use zip
+        uses: montudor/action-zip@v1
       
       - name: prepare files
         run: |
@@ -168,8 +170,7 @@ jobs:
           cp ./code/new/send_message.py ./upload/send_message/send_message.py
           cp ./code/utils/db_utils.py ./upload/send_message/db_utils.py
         
-      - name: use zip
-        uses: montudor/action-zip@v1
+     
       
       - name: build zip for modify data
         run: |
@@ -183,8 +184,23 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
-          function_name: modifyData
-          zip_file: modify_data.zip
+          function_name: fiemmebot_modify_data_v01
+          zip_file: modify_data.zip          
+          
+      - name: build zip for send message data
+        run: |
+          cd upload/send_message
+          zip -qq -r send_message.zip .
+          mv send_message.zip ../../
+          
+      - name: Deploy to aws function 
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: fiemmebot_send_reminder_v01
+          zip_file: send_message.zip
           
       
 
