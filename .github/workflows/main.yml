@@ -191,7 +191,7 @@ jobs:
         run: |
           cd upload/send_message
           zip -qq -r send_message.zip .
-          mv modify_data.zip ../../
+          mv send_message.zip ../../
           
       - name: Deploy to aws function 
         uses: appleboy/lambda-action@master
