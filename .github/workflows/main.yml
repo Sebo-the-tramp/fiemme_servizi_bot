@@ -87,8 +87,12 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: python.zip
+        name: python
         path: ./
+        
+    - name: unzip the artifact
+      run: |
+        unzip -qq ./python.zip -d ./target
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
