@@ -36,12 +36,6 @@ jobs:
           cp ./code/utils/db_utils.py ./libraries/python/utils/
           cd ./libraries/python
           zip -qq -r python.zip .
-          
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: python
-          path: ./libraries/python/
 
   test:  
     needs: build
