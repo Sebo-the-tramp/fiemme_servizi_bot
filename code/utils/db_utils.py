@@ -1,8 +1,8 @@
 import boto3
 import os
 
-KEY = os.getenv('KEY')
-SECRET = os.getenv('SECRET')
+KEY = os.getenv('DYNAMO_ACCESS_KEY_ID')
+SECRET = os.getenv('DYNAMO_SECRET_ACCESS_KEY')
 
 client = boto3.client(
     'dynamodb',
@@ -63,3 +63,13 @@ def read_all_users():
         TableName='fiemme_servizi_users',
         Select='ALL_ATTRIBUTES'
     )
+
+    return users
+
+
+
+# main
+if __name__ == '__main__':
+    print('Testing')
+
+    print(read_all_users())
