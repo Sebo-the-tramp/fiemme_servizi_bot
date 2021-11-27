@@ -34,14 +34,15 @@ jobs:
           pip install -r ./libraries/requirements.txt -t ./libraries/python
           mkdir ./libraries/python/utils
           cp ./code/utils/db_utils.py ./libraries/python/utils/
-          cd ./libraries/python
-          zip -qq -r python.zip .
+        
+        # cd ./libraries/python
+        # zip -qq -r python.zip .
           
           
       - uses: actions/upload-artifact@v2
         with:
           name: python
-          path: ./libraries/python/python.zip
+          path: ./libraries/python/
 
   test:  
     needs: build
@@ -88,11 +89,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: python
-        path: ./
-        
-    - name: unzip the artifact
-      run: |
-        unzip -qq ./home/runner/work/fiemme_servizi_bot/fiemme_servizi_bot/python.zip -d ./home/runner/work/fiemme_servizi_bot/fiemme_servizi_bot/target
+        path: ./   
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
