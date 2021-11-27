@@ -64,12 +64,4 @@ def read_all_users():
         Select='ALL_ATTRIBUTES'
     )
 
-    return users
-
-
-
-# main
-if __name__ == '__main__':
-    print('Testing')
-
-    print(read_all_users())
+    return users["Items"]

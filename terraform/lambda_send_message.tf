@@ -7,9 +7,9 @@ resource "aws_lambda_function" "fiemmebot_send_reminder" {
 
   environment {
     variables = {
-      KEY            = var.key,
-      SECRET         = var.secret,
-      TELEGRAM_TOKEN = var.telegram_token,
+      DYNAMO_ACCESS_KEY_ID     = var.key,
+      DYNAMO_SECRET_ACCESS_KEY = var.secret,
+      TELEGRAM_TOKEN           = var.telegram_token,
     }
   }
 
