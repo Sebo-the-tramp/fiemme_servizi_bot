@@ -39,7 +39,7 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: python.zip
+          name: python
           path: ./libraries/python/python.zip
 
   test:  
@@ -86,7 +86,7 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v2
       with:
-        name: python.zip
+        name: python
         path: ./
     
     - name: credentials
