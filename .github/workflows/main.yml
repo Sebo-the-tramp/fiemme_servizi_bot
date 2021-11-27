@@ -34,9 +34,8 @@ jobs:
           pip install -r ./libraries/requirements.txt -t ./libraries/python
           mkdir ./libraries/python/utils
           cp ./code/utils/db_utils.py ./libraries/python/utils/
-        
-        # cd ./libraries/python
-        # zip -qq -r python.zip .
+          cd ./libraries/python
+          zip -qq -r python.zip .
           
           
       - uses: actions/upload-artifact@v2
@@ -85,11 +84,14 @@ jobs:
     - name: Checkout  
       uses: actions/checkout@v2          
       
-    - name: download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: python
-        path: ./   
+    - name: Prepare libraries to be uploaded
+      run: |          
+        pip install -r ./libraries/requirements.txt -t ./libraries/python
+        mkdir ./libraries/python/utils
+        cp ./code/utils/db_utils.py ./libraries/python/utils/
+        cd ./libraries/python
+        zip -qq -r python.zip .
+          
     
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
