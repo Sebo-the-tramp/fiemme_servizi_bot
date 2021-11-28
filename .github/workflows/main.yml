@@ -79,13 +79,17 @@ jobs:
       uses: actions/checkout@v2          
       
     - name: Prepare libraries to be uploaded
-      run: |          
+      run: |    
+        mkdir ../libraries/python
         pip install -r ../libraries/requirements.txt -t ../libraries/python
+      
+    - name: Prepare zip
+      run: |
         mkdir ../libraries/python/utils
         cp ../code/utils/db_utils.py ../libraries/python/utils/
         cd ../libraries/python
-        zip -r -9 library.zip .
-        mv ./library.zip ../../
+        zip -qq -r libraries.zip .
+        mv libraries.zip ../../
           
     
     - name: credentials
