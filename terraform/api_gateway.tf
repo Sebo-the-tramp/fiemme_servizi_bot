@@ -43,6 +43,6 @@ resource "null_resource" "set_webhook_telegram" {
     always_run = "${timestamp()}"
   }
   provisioner "local-exec" {
-    command = "curl https://api.telegram.org/${var.telegram_token}/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
+    command = "curl https://api.telegram.org/${variables.var.telegram_token}/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
   }
 }
