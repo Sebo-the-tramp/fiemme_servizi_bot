@@ -84,8 +84,8 @@ jobs:
         mkdir ../libraries/python/utils
         cp ../code/utils/db_utils.py ../libraries/python/utils/
         cd ../libraries/python
-        zip -r -9 library.zip .
-        mv ./library.zip ../../
+        zip -r -9 libraries.zip .
+        mv ./libraries.zip ../../
           
     
     - name: credentials
