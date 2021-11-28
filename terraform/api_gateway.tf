@@ -24,7 +24,7 @@ resource "aws_apigatewayv2_integration" "telegram_endpoint" {
 
 resource "aws_apigatewayv2_route" "telegram_endpoint" {
   api_id    = aws_apigatewayv2_api.modify_data_api.id
-  route_key = "GET /hello"
+  route_key = "POST /fiemmebot_modify_data_v01"
   target    = "integrations/${aws_apigatewayv2_integration.telegram_endpoint.id}"
 }
 
@@ -37,7 +37,12 @@ resource "aws_lambda_permission" "api_gw" {
 }
 
 resource "null_resource" "set_webhook_telegram" {
+
+  # So it can be runned each time
+  triggers = {
+    always_run = "${timestamp()}"
+  }
   provisioner "local-exec" {
-    command = "curl https://api.telegram.org/bot1878021466:AAHiddZwscRyM6vlC3sYa9_Y9LB0A8XmKbU/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
+    command = "curl https://api.telegram.org/${telegram_token}/setWebhook?url=${aws_apigatewayv2_stage.default.invoke_url}/modifyData"
   }
 }
