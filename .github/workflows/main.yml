@@ -156,26 +156,35 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            modify:
+              - '**/modify.py'
+            send_message:
+              - '**/send_message.py'
+    
       - uses: actions/checkout@v2
       
       - name: use zip
         uses: montudor/action-zip@v1
       
-      - name: prepare files
+      - name: prepare files for modify
+        if: steps.changes.outputs.modify == 'true'
         run: |
-          mkdir upload
-          mkdir upload/send_message
           mkdir upload/modify_data
           cp ./code/new/modify.py ./upload/modify_data/modify.py
-          cp ./code/new/send_message.py ./upload/send_message/send_message.py
       
       - name: build zip for modify data
+        if: steps.changes.outputs.modify == 'true'
         run: |
           cd upload/modify_data
           zip -qq -r modify_data.zip .
           mv modify_data.zip ../../
           
-      - name: Deploy to aws function 
+      - name: Deploy to aws function modify function
+        if: steps.changes.outputs.modify == 'true'
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -184,13 +193,21 @@ jobs:
           function_name: fiemmebot_modify_data_v01
           zip_file: modify_data.zip          
           
-      - name: build zip for send message data
+      - name: prepare files for send_message
+        if: steps.changes.outputs.send_message == 'true'
+        run: |
+          mkdir upload/send_message
+          cp ./code/new/modify.py ./upload/modify_data/modify.py        
+          
+      - name: build zip for send_message
+        if: steps.changes.outputs.send_message == 'true'
         run: |
           cd upload/send_message
           zip -qq -r send_message.zip .
           mv send_message.zip ../../
           
-      - name: Deploy to aws function 
+      - name: Deploy to aws function send_message
+        if: steps.changes.outputs.send_message == 'true'
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
