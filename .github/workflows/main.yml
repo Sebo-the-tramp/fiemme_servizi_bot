@@ -156,6 +156,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - uses: actions/checkout@v2
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -164,8 +165,6 @@ jobs:
               - '**/modify.py'
             send_message:
               - '**/send_message.py'
-    
-      - uses: actions/checkout@v2
       
       - name: use zip
         uses: montudor/action-zip@v1
