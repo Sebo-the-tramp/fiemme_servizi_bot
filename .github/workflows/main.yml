@@ -169,20 +169,20 @@ jobs:
       - name: use zip
         uses: montudor/action-zip@v1
       
-      - name: prepare files for modify
+      - name: prepare files for modify_data
         if: steps.changes.outputs.modify == 'true'
         run: |
           mkdir upload/modify_data
           cp ./code/new/modify.py ./upload/modify_data/modify.py
       
-      - name: build zip for modify data
+      - name: build zip for modify_data
         if: steps.changes.outputs.modify == 'true'
         run: |
           cd upload/modify_data
           zip -qq -r modify_data.zip .
           mv modify_data.zip ../../
           
-      - name: Deploy to aws function modify function
+      - name: Deploy to aws function modify_data
         if: steps.changes.outputs.modify == 'true'
         uses: appleboy/lambda-action@master
         with:
