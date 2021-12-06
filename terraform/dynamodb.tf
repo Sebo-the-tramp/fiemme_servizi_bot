@@ -10,10 +10,6 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     type = "N"
   }
 
-  attribute {
-    name = "comune"
-    type = "N"
-  }
 
   ttl {
     attribute_name = "TimeToExist"
