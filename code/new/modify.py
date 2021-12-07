@@ -52,25 +52,13 @@ def response(update: Update, context: CallbackContext) -> None:
     """Parses the CallbackQuery and updates the message text."""
     query = update.callback_query    
     chat_id = update.callback_query.message.chat_id
-    query.answer()
-    
-    db.modify_user(chat_id, query.data)
-            
-    context_obj = {
-        "chat_id": str(chat_id),
-        "comune": str(query.data)
-    }           
-    
-    #insert_user_into_db(chat_id, query.data)   
-
+    query.answer()    
+    db.modify_user(chat_id, query.data) 
     query.edit_message_text(text=f"Comune selezionato: {COMUNI[int(query.data)]}🏘\n\nOgni giorno alle 20 ti verrà inviato un promemoria🥳\nControlla di avere le notifiche attive!🙈")
 
-def lambda_handler(event, context):
-    
-    TOKEN = os.getenv('TELEGRAM_TOKEN')
-    
+def lambda_handler(event, context):    
+    TOKEN = os.getenv('TELEGRAM_TOKEN')    
     bot = telegram.Bot(TOKEN)
-
     dispatcher = Dispatcher(bot, None, use_context=True)
 
     # on different commands - answer in Telegram

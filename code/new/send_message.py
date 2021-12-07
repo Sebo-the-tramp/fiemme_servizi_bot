@@ -68,7 +68,6 @@ DATA = {
 
 def send_reminder() -> None:
     """Send the alarm message."""
-
     bot = telegram.Bot(TOKEN)
     users = db.read_all_users()
 
@@ -80,9 +79,7 @@ def send_reminder() -> None:
 
 
 def send_message(chat_id, comune, bot):
-
     message_to_send = get_text(comune)
-
     if(message_to_send):
         bot.send_message(chat_id, text=message_to_send,
                          parse_mode=ParseMode.MARKDOWN)
