@@ -22,33 +22,22 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/setup-python@v2
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-          
-      - name: Prepare libraries to be uploaded
-        run: |          
-          pip install -r ./libraries/requirements.txt -t ./libraries/python
-          mkdir ./libraries/python/utils
-          cp ./code/utils/db_utils.py ./libraries/python/utils/
-          cd ./libraries/python
-          zip -qq -r python.zip .
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install -r ./libraries/requirements.txt
 
   test:  
     needs: build
     runs-on: ubuntu-latest
     
-    steps:
+    steps:    
       - uses: actions/checkout@v2
-    
-      # Use the artifact as the variables
-      # Runs a single command using the runners shell
-      - name: Set up the environment
-        run: |
-          pip install -r ./libraries/requirements.txt
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          cache: 'pip'
   
       # Runs a single command using the runners shell
       - name: Test the python executable
@@ -71,11 +60,6 @@ jobs:
     
     - name: Checkout  
       uses: actions/checkout@v2          
-      
-    - name: Prepare libraries to be uploaded
-      run: |    
-        mkdir ../libraries/python
-        pip install -r ../libraries/requirements.txt -t ../libraries/python
 
     - name: credentials
       uses: aws-actions/configure-aws-credentials@v1
