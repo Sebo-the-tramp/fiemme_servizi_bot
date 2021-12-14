@@ -38,7 +38,7 @@ jobs:
           
   terraform:  
     name: 'Terraform'    
-    needs: build
+    needs: build_and_test
     runs-on: ubuntu-latest
     
     defaults:
