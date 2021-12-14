@@ -26,20 +26,8 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
-      - run: pip install ./libraries/requirements.txt
-
-  test:  
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:    
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-          cache: 'pip'
-  
-      # Runs a single command using the runners shell
+      - run: pip install -r ./libraries/requirements.txt
+      
       - name: Test the python executable
         run: |
           pwd
@@ -49,7 +37,7 @@ jobs:
           
   terraform:  
     name: 'Terraform'    
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     
     defaults:
