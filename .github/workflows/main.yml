@@ -159,7 +159,7 @@ jobs:
       - name: prepare files for send_message
         if: steps.changes.outputs.send_message == 'false'
         run: |
-          mkdir ./upload/send_message
+          mkdir -p upload/send_message
           cp ./code/new/modify.py ./upload/modify_data/modify.py        
           
       - name: build zip for send_message
