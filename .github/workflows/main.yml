@@ -38,6 +38,7 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
+      - run: pip install -r ./libraries/requirements.txt
 
   
       # Runs a single command using the runners shell
