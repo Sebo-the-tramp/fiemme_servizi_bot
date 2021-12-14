@@ -136,7 +136,7 @@ jobs:
       - name: prepare files for modify_data
         if: steps.changes.outputs.modify == 'true'
         run: |
-          mkdir upload/modify_data
+          mkdir ./upload/modify_data
           cp ./code/new/modify.py ./upload/modify_data/modify.py
       
       - name: build zip for modify_data
@@ -159,7 +159,7 @@ jobs:
       - name: prepare files for send_message
         if: steps.changes.outputs.send_message == 'true'
         run: |
-          mkdir upload/send_message
+          mkdir ./upload/send_message
           cp ./code/new/modify.py ./upload/modify_data/modify.py        
           
       - name: build zip for send_message
