@@ -33,7 +33,6 @@ jobs:
     
     steps:    
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2      
   
       # Runs a single command using the runners shell
       - name: Test the python executable
