@@ -105,7 +105,7 @@ def get_text(comune):
                 list_mondizie = list_mondizie.replace("VETRO", "")
 
         text += "🔔 Promemoria! 🔔\n\n"
-        text += "Domani mattina nel comune di *" + \
+        text += "Domani pomeriggio nel comune di *" + \
             str(DATA[comune]["nome"]) + \
             "* verrà effettuata la raccolta dei seguenti rifiuti:\n\n"
 

@@ -37,7 +37,7 @@ COMUNI = [
 ]
 
 def start(update: Update, context: CallbackContext) -> None:    
-    update.message.reply_text('Benvenuto! Usa il comando /set per impostare il comune dove effettuare il promemoria')
+    update.message.reply_text('Ciao! Usa il comando /set per impostare il comune dove effettuare il promemoria')
     
 def stop_notification(update: Update, context: CallbackContext):    
     chat_id = update.message.chat_id    
