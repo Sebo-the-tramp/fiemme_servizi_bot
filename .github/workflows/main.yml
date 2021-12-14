@@ -133,9 +133,6 @@ jobs:
             send_message:
               - '**/send_message.py'
       
-      - name: use zip
-        uses: montudor/action-zip@v1
-      
       - name: prepare files for modify_data
         if: steps.changes.outputs.modify == 'true'
         run: |
