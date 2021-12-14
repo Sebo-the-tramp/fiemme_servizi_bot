@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
-      - run: pip install -r ./libraries/requirements.txt
+      - run: pip install ./libraries/requirements.txt
 
   test:  
     needs: build
