@@ -67,7 +67,7 @@ to the state they previously set.
 
 ### Diagram of the infrastructure
 
-insert diagram image
+![alt text](./documentation/Infrastructure_fiemme_servizi.jpg "Infrastructure")
 
 ### The pipeline
 
