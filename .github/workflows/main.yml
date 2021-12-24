@@ -160,7 +160,7 @@ jobs:
         if: steps.changes.outputs.send_message == 'true'
         run: |
           mkdir -p upload/send_message
-          cp ./code/new/send_message.py ./upload/send_message/modify.py        
+          cp ./code/new/send_message.py ./upload/send_message/send_message.py        
           
       - name: build zip for send_message
         if: steps.changes.outputs.send_message == 'true'
