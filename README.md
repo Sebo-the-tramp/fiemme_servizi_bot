@@ -71,8 +71,17 @@ to the state they previously set.
 
 ### The pipeline
 
-The pipeline is divided into 3 main phases which Simon will describe
-way better than me
+The pipeline is triggered when a new commit or a merge request to the master branch is made. The pipelinesteps are divided into 3 phases:
+
+- Build & test 
+The 'Build & test' phase is used to install all the required python libraries (using the requirements.txt file) and run the tests for the application.
+- Terraform setup
+The 'terraform setup' phase uses the github secrets to create:
+  - lambda layer (libraries for both of the lambda functions)
+  - 2 lambda functions 
+  - dynamoDB database
+- Upload
+The 'Upload' phase checks if changes were made to the content of any lambda function. If changes were detected, the new lambda content is rezipped and the terraform plan will be modified.
 
 ### Diagram of the pipeline
 
@@ -81,7 +90,7 @@ way better than me
 ## Difficulties that we had
 
 For both of us, it was the first time we used pipelines in a devops environment so basically it was all a challenge for us.
-One of the trickiest part for us was to be able to upload a zip file to AWS, with was basically the core of the project. We tried to make a trade off, and since the zip would be touched the least we decided to store it statically in order to speed up the process and make few computation manually. That was because the zip file system together with the artifacts function, didn't really work very good together, maybe for the different way of zip the files in the docker images.
+One of the trickiest part for us was to be able to upload a zip file to AWS, which was basically the core of the project. We tried to make a trade off, and since the zip would be touched the least we decided to store it statically in order to speed up the process and make few computation manually. That was because the zip file system together with the artifacts function, didn't really work very good together, maybe for the different way of zip the files in the docker images.
 
 The other hard part was to learn terraform, such a new and wide area, but in the end it was worth it, and also the online material wasn't very good, it was good enough, and better than other documentation.
 
