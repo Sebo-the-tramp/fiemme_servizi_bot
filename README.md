@@ -78,11 +78,7 @@ The pipeline is triggered when a new commit or a merge request to the master bra
 The 'Build & test' phase is used to install all the required python libraries (using the requirements.txt file) and run the tests for the application.
 - Terraform setup
 
-The 'terraform setup' phase uses the github secrets to create:
-
-lambda layer (libraries for both of the lambda functions)
-2 lambda functions 
-dynamoDB database
+The 'terraform setup' phase uses the github secrets to create a lambda layer (libraries for both of the lambda functions), 2 lambda functions and a DynamoDB database.
 
 - Upload
 
