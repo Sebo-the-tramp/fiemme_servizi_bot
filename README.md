@@ -79,10 +79,10 @@ The 'Build & test' phase is used to install all the required python libraries (u
 - Terraform setup
 
 The 'terraform setup' phase uses the github secrets to create:
-  - lambda layer (libraries for both of the lambda functions)
-  - 2 lambda functions 
-  - dynamoDB database
 
+lambda layer (libraries for both of the lambda functions)
+2 lambda functions 
+dynamoDB database
 
 - Upload
 
