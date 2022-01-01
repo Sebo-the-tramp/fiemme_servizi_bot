@@ -73,14 +73,17 @@ to the state they previously set.
 
 The pipeline is triggered when a new commit or a merge request to the master branch is made. The pipelinesteps are divided into 3 phases:
 
-- Build & test 
+- Build & test
+
 The 'Build & test' phase is used to install all the required python libraries (using the requirements.txt file) and run the tests for the application.
 - Terraform setup
+
 The 'terraform setup' phase uses the github secrets to create:
   - lambda layer (libraries for both of the lambda functions)
   - 2 lambda functions 
   - dynamoDB database
 - Upload
+
 The 'Upload' phase checks if changes were made to the content of any lambda function. If changes were detected, the new lambda content is rezipped and the terraform plan will be modified.
 
 ### Diagram of the pipeline
