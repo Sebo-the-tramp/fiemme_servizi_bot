@@ -82,6 +82,8 @@ The 'terraform setup' phase uses the github secrets to create:
   - lambda layer (libraries for both of the lambda functions)
   - 2 lambda functions 
   - dynamoDB database
+
+
 - Upload
 
 The 'Upload' phase checks if changes were made to the content of any lambda function. If changes were detected, the new lambda content is rezipped and the terraform plan will be modified.
