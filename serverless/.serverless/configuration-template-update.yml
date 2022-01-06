@@ -1,0 +1,20 @@
+resources:
+  - type: storage.v1.bucket
+    name: sls-fiemme-servizi-dev-1641391352009
+    properties:
+      location: us-central1
+  - type: gcp-types/cloudfunctions-v1:projects.locations.functions
+    name: fiemme-servizi-dev-second
+    properties:
+      parent: projects/fiemme-servizi/locations/us-central1
+      availableMemoryMb: 256
+      runtime: python37
+      timeout: 60s
+      entryPoint: event
+      function: fiemme-servizi-dev-second
+      sourceArchiveUrl: >-
+        gs://sls-fiemme-servizi-dev-1641391352009/serverless/fiemme-servizi/dev/1641404272758-2022-01-05T17:37:52.758Z/fiemme-servizi.zip
+      labels: {}
+      eventTrigger:
+        eventType: providers/cloud.pubsub/eventTypes/topic.publish
+        resource: projects/fiemme-servizi/topics/test

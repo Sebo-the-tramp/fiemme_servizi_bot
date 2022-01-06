@@ -103,5 +103,31 @@ In the following we will analyze how the system would have to change, with the s
 
 ### Serverless framework
 
-### Microsoft azure environment
+The serverless framework offers a more detailed approach to serverless functions to be operated on __any cloud provider.__ It is very powerful but the limitations of migrations are still a problem, mostly because each big player wants to keep its users, creating a lock-in environment, from which it is difficult to exit. Also the different languages that are used on the different cloud provider may slow down the process of migration, because the code needs to be rewrote or refactored at least, to encompass the proprietary systems.
 
+Nevertheless, we tried to deploy on google cloud the cronjob with serverless and the following is the "resumee" of what happened.
+
+#### Configuration
+
+So as first step following the serverless documentation that is really extensive and rich, we needed to set up a new project in google cloud. At this point it is clear that the configuration can only be made manually and each cloud provider has a different approach and requirements. This was a time expensive part and cannot be replaced by any automated process. The credentials needs to be stored in the PC and serverless then will manage them automatically. That is a very strong point to serverless.
+
+#### Setting Up the environment
+
+Following the guide of the serverless website, I configured all the credentials and I used the template given by the framework. It took an afternoon to make it work, because there was some conflicts with the names, resources and privileges of the project.
+The problem is that with the google cloud environment there is not many ways to configure events that triggers the function, so I had to add the cronjob manually from the console and not from code.
+Nevertheless a good point was in favor to google cloud functions as they installed already the libraries just by providing the "requirements.txt" file. A lot of time was saved.
+
+#### Google cloud environment
+
+How the function is built is very similar to a lambda function therefore the code I uploaded is the same, aside from a small db call that I mocked for convenience. The difference as I already mentioned before is the way the function is being called. In AWS there is an apposite service that let you add chron jobs and triggers directly the function. In google function instead, there is a single point which is a pubsub endpoint in which all types of requests can be added. I had to configure one of this services in order to trigger the function.
+I wasn't able to find a way to add such service only by code. Whether in AWS and serverless all the infrastructure can be built with code.
+
+I only deployed one of the tw functions and they both works, so to try, because if I were to upload the "updating message" function it would have had a conflict with the one on AWS. But I found that migrating one, was the hardest part, migrating two or more wouldn't be exponentially more difficult than just from 0 to 1.
+
+### Conclusion
+
+It is rather easier to change the infrastructure with serverless framework, than with terraform as it is more concise and it is specialized in serverless functions. Anyhow migrating a service it is never an easy challenge, as there is always problems of configuration when it goes well. A good thing is not to be forced to change the language of the program, otherwise the migration becomes a nightmare.
+
+Something that I learned by doing this test of migration, is that a deep analysis of the cloud provider to whom we want to change is needed before even starting in order not to encounter libraries or programming languages issues.
+
+The later process is way faster with serverless than with terraform or any other infrastructure as a code. Only for serverless architecture I am sure of this.

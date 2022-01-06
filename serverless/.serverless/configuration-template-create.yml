@@ -1,0 +1,5 @@
+resources:
+  - type: storage.v1.bucket
+    name: sls-fiemme-servizi-dev-1641391352009
+    properties:
+      location: us-central1

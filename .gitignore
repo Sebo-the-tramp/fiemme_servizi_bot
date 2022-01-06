@@ -4,3 +4,4 @@
 **.terraform**
 **terraform.**
 **.pyc
+**/node_modules/**
