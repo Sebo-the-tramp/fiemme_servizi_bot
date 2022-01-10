@@ -11,6 +11,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+  LAMBDA_LAYER_NAME: telegram_bot_libraries
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -136,15 +142,22 @@ jobs:
               - '**/libraries.zip'
               
       - name: Deploy to aws function the libraries
+        # if: steps.changes.outputs.libraries == 'true'
+        run: |
+          echo "Publishing dependencies as a layer..."
+          result=$(aws lambda publish-layer-version --layer-name "${LAMBDA_LAYER_NAME}" --zip-file fileb://libraries/libraries.zip)
+          echo $result
+          LAYER_VERSION_ARN=$(jq '.LayerVersionArn' <<< "$result")
+          echo ::set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN
+          rm -rf python
+          rm dependencies.zip
+          
+      - name: Update function layer
         if: steps.changes.outputs.libraries == 'true'
-        uses: taotao2345/aws-lambda-publishlayer@v1.0.0
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        with:
-          layer_name: telegram_bot_libraries
-          zip_file: ./libraries/libraries.zip
+        run: |
+          echo "Using the layer in the function..."
+          aws lambda update-function-configuration --function-name "${LAMBDA_FUNCTION_NAME}" --layers "${LAYER_VERSION_ARN}"
+        
 
       - name: prepare files for modify_data
         if: steps.changes.outputs.modify == 'true'
