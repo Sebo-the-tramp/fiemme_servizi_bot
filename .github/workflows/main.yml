@@ -148,9 +148,7 @@ jobs:
           result=$(aws lambda publish-layer-version --layer-name "${LAMBDA_LAYER_NAME}" --zip-file fileb://libraries/libraries.zip)
           echo $result
           LAYER_VERSION_ARN=$(jq '.LayerVersionArn' <<< "$result")
-          echo ::set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN
-          rm -rf python
-          rm dependencies.zip
+          echo "::`set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN`::"
           
       - name: Update function layer
         if: steps.changes.outputs.libraries == 'true'
