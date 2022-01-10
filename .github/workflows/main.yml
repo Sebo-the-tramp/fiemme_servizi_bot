@@ -16,6 +16,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
   LAMBDA_LAYER_NAME: telegram_bot_libraries
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -148,7 +149,7 @@ jobs:
           result=$(aws lambda publish-layer-version --layer-name "${LAMBDA_LAYER_NAME}" --zip-file fileb://libraries/libraries.zip)
           echo $result
           LAYER_VERSION_ARN=$(jq '.LayerVersionArn' <<< "$result")
-          echo "::`set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN`::"
+          echo ::set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN
           
       - name: Update function layer
         # if: steps.changes.outputs.libraries == 'true'
