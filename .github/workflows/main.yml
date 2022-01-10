@@ -62,7 +62,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: AWS_DEFAULT_REGION
+        aws-region: ${{AWS_DEFAULT_REGION}}
     
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -177,7 +177,7 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: AWS_DEFAULT_REGION
+          aws_region: ${{AWS_DEFAULT_REGION}}
           function_name: fiemmebot_modify_data_v01
           zip_file: modify_data.zip          
           
@@ -200,7 +200,7 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: AWS_DEFAULT_REGION
+          aws_region: ${{AWS_DEFAULT_REGION}}
           function_name: fiemmebot_send_reminder_v01
           zip_file: send_message.zip
           
