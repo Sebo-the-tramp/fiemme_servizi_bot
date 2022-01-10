@@ -155,7 +155,7 @@ jobs:
         # if: steps.changes.outputs.libraries == 'true'
         run: |
           echo "Using the layer in the function fiemmebot_send_reminder_v01..."
-          aws lambda update-function-configuration --function-name fiemmebot_send_reminder_v01 --layers "${LAYER_VERSION_ARN}"
+          aws lambda update-function-configuration --function-name fiemmebot_send_reminder_v01 --layers ["${LAYER_VERSION_ARN}"]
         
 
       - name: prepare files for modify_data
