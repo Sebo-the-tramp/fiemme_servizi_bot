@@ -151,7 +151,7 @@ jobs:
           echo "::`set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN`::"
           
       - name: Update function layer
-        if: steps.changes.outputs.libraries == 'true'
+        # if: steps.changes.outputs.libraries == 'true'
         run: |
           echo "Using the layer in the function..."
           aws lambda update-function-configuration --function-name "${LAMBDA_FUNCTION_NAME}" --layers "${LAYER_VERSION_ARN}"
