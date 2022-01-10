@@ -143,7 +143,7 @@ jobs:
               - '**/libraries.zip'
               
       - name: Deploy to aws function the libraries
-        # if: steps.changes.outputs.libraries == 'true'
+        if: steps.changes.outputs.libraries == 'true'
         run: |
           echo "Publishing dependencies as a layer..."
           result=$(aws lambda publish-layer-version --layer-name "${LAMBDA_LAYER_NAME}" --zip-file fileb://libraries/libraries.zip)
@@ -152,7 +152,7 @@ jobs:
           echo ::set-env name=LAYER_VERSION_ARN::$LAYER_VERSION_ARN
           
       - name: Update function layer
-        # if: steps.changes.outputs.libraries == 'true'
+        if: steps.changes.outputs.libraries == 'true'
         run: |
           echo "Using the layer in the function fiemmebot_send_reminder_v01..."
           aws lambda update-function-configuration --function-name fiemmebot_send_reminder_v01 --layers ["${LAYER_VERSION_ARN}"]
