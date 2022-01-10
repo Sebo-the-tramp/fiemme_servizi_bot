@@ -144,7 +144,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           layer_name: telegram_bot_libraries
-          zip_file: ./libraries/libararies.zip
+          zip_file: ./libraries/libraries.zip
 
       - name: prepare files for modify_data
         if: steps.changes.outputs.modify == 'true'
