@@ -10,15 +10,15 @@ import telegram
 
 KEYBOARD = [
         [InlineKeyboardButton("Carano", callback_data='0')],
-        [InlineKeyboardButton("Capriana", callback_data='1')],
+        [InlineKeyboardButton("Capriana e Valforiana", callback_data='1')],
         [InlineKeyboardButton("Castello Molina di Fiemme", callback_data='2')],
         [InlineKeyboardButton("Cavalese", callback_data='3')],
-        [InlineKeyboardButton("Daiano", callback_data='4')],
+        [InlineKeyboardButton("Daiano e Varena", callback_data='4')],
         [InlineKeyboardButton("Panchià", callback_data='5')],
         [InlineKeyboardButton("Tesero", callback_data='6')],
         [InlineKeyboardButton("Predazzo", callback_data='7')],
-        [InlineKeyboardButton("Valfloriana", callback_data='8')],
-        [InlineKeyboardButton("Varena", callback_data='9')],
+        #[InlineKeyboardButton("Valfloriana", callback_data='8')],
+        #[InlineKeyboardButton("Varena", callback_data='9')],
         [InlineKeyboardButton("Ziano di Fiemme", callback_data='10')],
     ]
 

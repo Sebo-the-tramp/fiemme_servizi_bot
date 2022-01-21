@@ -54,7 +54,7 @@ DATA = {
         "mondizie": ["", "CARTA", "UMIDO", "VETRO", "SECCO,PLASTICA", "UMIDO", ""],
     },
     "9": {
-        "nome": "Varena",
+        "nome": "Varena non c'e piu",
         "vetro": 1,
         "mondizie": ["", "", "UMIDO,CARTA,PLASTICA", "VETRO", "", "SECCO,UMIDO", ""],
     },
