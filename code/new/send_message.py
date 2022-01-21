@@ -10,12 +10,12 @@ TOKEN = os.getenv('TELEGRAM_TOKEN')
 DATA = {
     "0": {
         "nome": "Carano",
-        "vetro": 1,
+        "vetro": 0,
         "mondizie": ["", "", "UMIDO,CARTA,PLASTICA", "", "", "SECCO,UMIDO,VETRO", ""],
     },
     "1": {
         "nome": "Capriana",
-        "vetro": 0,
+        "vetro": 1,
         "mondizie": ["", "CARTA", "UMIDO", "VETRO", "SECCO,PLASTICA", "UMIDO", ""],
     },
     "2": {
@@ -30,17 +30,17 @@ DATA = {
     },
     "4": {
         "nome": "Daiano",
-        "vetro": 1,
+        "vetro": 0,
         "mondizie": ["", "", "UMIDO,CARTA,PLASTICA", "VETRO", "", "SECCO,UMIDO", ""],
     },
     "5": {
         "nome": "Panchià",
-        "vetro": 1,
+        "vetro": 0,
         "mondizie": ["", "UMIDO,CARTA,VETRO", "", "PLASTICA", "SECCO,UMIDO", "", ""],
     },
     "6": {
         "nome": "Tesero",
-        "vetro": 0,
+        "vetro": 1,
         "mondizie": ["", "UMIDO", "", "", "UMIDO,CARTA", "SECCO,VETRO,PLASTICA", ""],
     },
     "7": {
@@ -60,7 +60,7 @@ DATA = {
     },
     "10": {
         "nome": "Ziano diFiemme",
-        "vetro": 1,
+        "vetro": 0,
         "mondizie": ["UMIDO", "CARTA,VETRO", "", "UMIDO,PLASTICA", "SECCO", "", ""],
     },
 }
@@ -79,15 +79,15 @@ def send_reminder() -> None:
 
 
 def send_message(chat_id, comune, bot):
-    message_to_send = get_text(comune)
+    tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+    message_to_send = get_text(comune, tomorrow)
     if(message_to_send):
         bot.send_message(chat_id, text=message_to_send,
                          parse_mode=ParseMode.MARKDOWN)
 
-def get_text(comune):
+def get_text(comune, tomorrow):
     text = ""
-
-    tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+    
     day_of_week = tomorrow.weekday()
 
     list_mondizie = DATA[comune]["mondizie"][day_of_week]
@@ -98,7 +98,7 @@ def get_text(comune):
             day_month = int(tomorrow.strftime("%d"))
             # get the number of the week and check if the modulo 2 is odd or even and assert it with the
             # same data in VETRO data structure
-            is_not_VETRO_week = not (
+            is_not_VETRO_week = (
                 (day_month-1)//7+1) % 2 != DATA[str(comune)]["vetro"]
             if(is_not_VETRO_week):
                 list_mondizie = list_mondizie.replace(",VETRO", "")
