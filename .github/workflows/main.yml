@@ -39,8 +39,8 @@ jobs:
       - name: Test the python executable
         run: |
           pwd
-          cd ./code
-          python -m unittest tests.send_message_test
+          cd ./code/unittest
+          python send_message_test.py
           
           
   terraform:  
