@@ -37,12 +37,12 @@ COMUNI = [
 ]
 
 def start(update: Update, context: CallbackContext) -> None:    
-    update.message.reply_text('Benvenuto! Usa il comando /set per impostare il comune dove effettuare il promemoria')
+    update.message.reply_text('Benvenut*! Usa il comando /set per impostare il comune dove effettuare il promemoria')
     
 def stop_notification(update: Update, context: CallbackContext):    
     chat_id = update.message.chat_id    
     db.delete_user(chat_id)    
-    update.message.reply_text('Ok da adesso non riceverai più notifiche, a presto!')
+    update.message.reply_text('Ok, da adesso non riceverai più notifiche, a presto!')
         
 def set_reminder(update: Update, context: CallbackContext) -> None:   
     reply_markup = InlineKeyboardMarkup(KEYBOARD)
