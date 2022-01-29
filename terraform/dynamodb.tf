@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "fiemme_servizi_dbv1"
+  name           = "fiemme_servizi_users"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
